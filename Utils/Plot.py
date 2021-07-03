@@ -13,13 +13,3 @@ class Plot():
 
         plt.savefig(figure_name)
         plt.close()
-
-    @staticmethod
-    def plot_series(time, series, figure_name, format="-", start=0, end=None, on_same_figure=False):
-        plt.plot(time[start:end], series[start:end], format)
-        plt.xlabel("Time")
-        plt.ylabel("Value")
-        plt.grid(True)
-
-        plt.savefig(figure_name)
-        plt.close()

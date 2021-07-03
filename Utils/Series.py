@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+from statistics import median
 
 class Series:
     @staticmethod
@@ -35,3 +36,38 @@ class Series:
             lambda window: (window[:-1], window[-1]))
         dataset = dataset.batch(batch_size).prefetch(1)
         return dataset
+    
+    @staticmethod
+    def get_data(data_path):
+        f = open(data_path)
+        data = f.read()
+        f.close()
+        lines = data.split('\n')
+        header = lines[0].split(',')
+        lines = lines[1:]
+        temperatures = []
+        # Loop over the data, and make it as a series of points
+        for line in lines:
+            if line:
+                linedata = line.split(',')
+                linedata = linedata[1:13]
+                linedata = [float(i) for i in linedata]
+
+                # Skip the croupted rows (all items are 999.9 or 999.90)
+                croupted_data = True
+                for i in linedata:
+                    if i == 999.90 or i == 999.9:
+                        croupted_data = True
+                    else:
+                        croupted_data = False
+                if croupted_data:
+                    continue
+                
+                for item in linedata:
+                    if item == 999.90 or item == 999.9:
+                        item = median(linedata)   # if it is croupted, take the median of the row
+                    temperatures.append(item)
+
+        series = np.asarray(temperatures)
+        time = np.arange(len(temperatures), dtype="float32")
+        return time, series

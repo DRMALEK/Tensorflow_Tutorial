@@ -1,7 +1,6 @@
 import sys
 sys.path.append('../')
 
-from statistics import median
 from matplotlib import pyplot as plt
 from Utils.Plot import Plot
 from Utils.Series import Series
@@ -9,45 +8,8 @@ import numpy as np
 import tensorflow as tf
 import sys
 
-# A function to read giss data from a .csv file
-def get_data():
-    data_file = "./station_larger.csv"
-    f = open(data_file)
-    data = f.read()
-    f.close()
-    lines = data.split('\n')
-    header = lines[0].split(',')
-    lines = lines[1:]
-    temperatures = []
-    # Loop over the data, and make it as a series of points
-    for line in lines:
-        if line:
-            linedata = line.split(',')
-            linedata = linedata[1:13]
-            linedata = [float(i) for i in linedata]
-
-            croupted_data = True
-            for i in linedata:
-                if i == 999.90 or i == 999.9:
-                    croupted_data = True
-                else:
-                    croupted_data = False
-
-            if croupted_data:
-                continue
-
-            for item in linedata:
-                if item == 999.90 or item == 999.9:
-                    item = median(linedata)
-
-                temperatures.append(item)
-
-    series = np.asarray(temperatures)
-    time = np.arange(len(temperatures), dtype="float32")
-    return time, series
-
 # Split the data
-time, series = get_data()
+time, series = Series.get_data('./station_larger.csv')
 split_time = 1017 # 75% for train, 25% for validiaton
 time_train = time[:split_time]
 x_train = series[:split_time]
@@ -89,7 +51,6 @@ history = model.fit(dataset, epochs=50, verbose=1,
 # Do evaluation over a set of values
 forecast = []
 forecast.append(model.predict(valid_dataset))
-forecast = forecast[0]
 results = np.array(forecast)
 x_valid = series[split_time:]
 
