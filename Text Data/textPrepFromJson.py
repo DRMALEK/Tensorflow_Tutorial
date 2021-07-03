@@ -4,7 +4,7 @@ from keras.preprocessing.text import Tokenizer
 from keras_preprocessing.sequence import pad_sequences
 from nltk.corpus import stopwords
 import string
-import  json
+import json
 
 # Data preparation
 with open("/tmp/sarcasm.json", 'r') as f:
@@ -41,8 +41,8 @@ testing_labels = labels[training_size:]
 
 vocab_size = 20000
 max_length = 10
-trunc_type='post'
-padding_type='post'
+trunc_type = 'post'
+padding_type = 'post'
 oov_tok = "<OOV>"
 tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_tok)
 tokenizer.fit_on_texts(training_sentences)

@@ -2,7 +2,7 @@ import tensorflow as tf
 
 # Load the dataset
 data = tf.keras.datasets.fashion_mnist
-(train_X, train_Y),(test_X, test_Y) = data.load_data()
+(train_X, train_Y), (test_X, test_Y) = data.load_data()
 
 # See the shape of the data
 print('train X shape: ', train_X.shape)
@@ -18,13 +18,7 @@ test_X = test_X / 255.0
 # Create the model
 model = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
-    tf.keras.layers.Dense(256, activation=tf.nn.relu),
-    # At every epoch 20% of the neurons's contribuatiion to the next layer is disabled
-    tf.keras.layers.Dropout(0.2),
     tf.keras.layers.Dense(128, activation=tf.nn.relu),
-    tf.keras.layers.Dropout(0.2),
-    tf.keras.layers.Dense(64, activation=tf.nn.softmax),
-    tf.keras.layers.Dropout(0.2),
     tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 

@@ -31,4 +31,5 @@ x = tf.keras.layers.Dense(1, activation='sigmoid')(x)
 
 # Combine the pretrained model with new created dense layers
 model = tf.keras.Model(pre_trained_model, x)
-model.compile(optimizer=RMSprop(lr=0.0001), loss='binary_crossentropy', metrics=['acc'])
+model.compile(optimizer=RMSprop(lr=0.0001),
+              loss='binary_crossentropy', metrics=['acc'])

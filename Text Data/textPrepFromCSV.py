@@ -41,12 +41,12 @@ testing_labels = labels[training_size:]
 # do tokenizing and padding
 vocab_size = 20000
 max_length = 10
-trunc_type='post'
-padding_type='post'
+trunc_type = 'post'
+padding_type = 'post'
 oov_tok = "<OOV>"
 tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_tok)
 tokenizer.fit_on_texts(training_sentences)
 word_index = tokenizer.word_index
 training_sequences = tokenizer.texts_to_sequences(training_sentences)
-training_padded = pad_sequences(training_sequences, maxlen=max_length, padding=padding_type, truncating=trunc_type)
-
+training_padded = pad_sequences(
+    training_sequences, maxlen=max_length, padding=padding_type, truncating=trunc_type)
