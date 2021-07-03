@@ -6,4 +6,4 @@
   Happy Learning 💪
 
 ## Author
-DRMALEK
+@DRMALEK
