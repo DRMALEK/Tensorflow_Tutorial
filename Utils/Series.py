@@ -56,17 +56,10 @@ class Series:
                 # Skip the croupted rows (all items are 999.9 or 999.90)
                 croupted_data = True
                 for i in linedata:
-                    if i == 999.90 or i == 999.9:
-                        croupted_data = True
-                    else:
-                        croupted_data = False
-                if croupted_data:
-                    continue
-                
-                for item in linedata:
-                    if item == 999.90 or item == 999.9:
-                        item = median(linedata)   # if it is croupted, take the median of the row
-                    temperatures.append(item)
+                    if i == 999.90 or i == 999.9 :
+                        break
+                        
+                    temperatures.append(i)
 
         series = np.asarray(temperatures)
         time = np.arange(len(temperatures), dtype="float32")

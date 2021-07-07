@@ -10,6 +10,11 @@ import sys
 
 # Get the data
 time, series = Series.get_data('station.csv')
+split_time = 630 # 75% for train, 25% for validiaton
+time_train = time[:split_time]
+x_train = series[:split_time]
+time_valid = time[split_time:]
+x_valid = series[split_time:]
 
 # Create a windowed dataset
 window_size = 24

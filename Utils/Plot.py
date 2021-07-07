@@ -10,6 +10,8 @@ class Plot():
         plt.plot(ypoints, label=ypoints_label)
         plt.plot(ypoints2, label=ypoints2_label)
         plt.legend()
-
+        
+        
+        
         plt.savefig(figure_name)
         plt.close()

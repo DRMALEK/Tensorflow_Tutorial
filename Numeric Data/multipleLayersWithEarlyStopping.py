@@ -1,15 +1,11 @@
 import tensorflow as tf
 
 # Define a callback class, with callback functions
-
-
 class myCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
         if(logs.get('accuracy') > 0.95):
             print('\n Reached 95% accuracy so cancelling training!')
             self.model.stop_training = True
-
-
 callbacks = myCallback()
 
 # Load the dataset

@@ -1,4 +1,7 @@
-from utils.Plot import Plot
+import sys
+sys.path.append('../')
+
+from Utils.Plot import Plot
 import csv
 from keras.preprocessing.text import Tokenizer
 from keras_preprocessing.sequence import pad_sequences
@@ -8,10 +11,6 @@ import json
 import tensorflow as tf
 import numpy as np
 import sys
-
-# Change this path according to your own system
-sys.path.append(
-    '/home/malek/Downloads/tensorflow_certifacate_prep-20210616T171606Z-001/tensorflow_certifacate_prep')
 
 
 # Data preparation
